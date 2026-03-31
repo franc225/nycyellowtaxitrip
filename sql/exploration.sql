@@ -62,3 +62,25 @@ ORDER BY month;
 SELECT
     AVG(date_diff('minute', tpep_pickup_datetime, tpep_dropoff_datetime)) AS avg_duration_minutes
 FROM yellow_taxi;
+
+SELECT COUNT(*) AS raw_rows
+FROM yellow_taxi;
+
+SELECT COUNT(*) AS staging_rows
+FROM stg_yellow_taxi;
+
+SELECT *
+FROM stg_yellow_taxi
+LIMIT 20;
+
+SELECT
+    MIN(trip_duration_minutes) AS min_duration,
+    AVG(trip_duration_minutes) AS avg_duration,
+    MAX(trip_duration_minutes) AS max_duration
+FROM stg_yellow_taxi;
+
+SELECT
+    MIN(trip_distance) AS min_distance,
+    AVG(trip_distance) AS avg_distance,
+    MAX(trip_distance) AS max_distance
+FROM stg_yellow_taxi;
