@@ -92,6 +92,7 @@ nyc_taxi.duckdb # analytical database
 sql/
 exploration.sql # exploratory analysis queries
 quality.sql # compare accepted vs rejected records
+quality_start_schema.sql # check star schema composition
 staging.sql # data cleaning and staging
 
 scripts/
@@ -124,13 +125,13 @@ Current stage:
 - DuckDB warehouse created
 - data imported from parquet files
 - initial SQL exploration implemented
+- data cleaning and staging layer
+- dimensional star schema modeling
 
 ---
 
 # Next Steps
 
-- data cleaning and staging layer
-- dimensional star schema modeling
 - analytical SQL queries
 - Power BI dashboard
 - demand forecasting model
