@@ -234,16 +234,21 @@ ORDER BY
     d.year,
     d.month;
 
+-- 17. Heures de pointe
 SELECT
     pickup_hour,
     COUNT(*) AS total_trips,
     AVG(total_amount) AS avg_trip_amount
 FROM fact_trip
-GROUP BY pickup_hour
-ORDER BY pickup_hour;
+GROUP BY
+    pickup_hour
+ORDER BY
+    pickup_hour;
 
+-- 18. Heures de pointe par jour de semaine
 SELECT
     d.day_name,
+    d.day_of_week,
     f.pickup_hour,
     COUNT(*) AS total_trips
 FROM fact_trip f
@@ -257,8 +262,9 @@ ORDER BY
     d.day_of_week,
     f.pickup_hour;
 
+-- 19. Top 10 pickup zones
 SELECT
-    l.borough,
+    b.borough,
     l.zone_name,
     l.service_zone,
     COUNT(*) AS total_trips,
@@ -266,16 +272,19 @@ SELECT
 FROM fact_trip f
 JOIN dim_location l
     ON f.pickup_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
 GROUP BY
-    l.borough,
+    b.borough,
     l.zone_name,
     l.service_zone
 ORDER BY
     total_trips DESC
 LIMIT 10;
 
+-- 20. Top 10 dropoff zones
 SELECT
-    l.borough,
+    b.borough,
     l.zone_name,
     l.service_zone,
     COUNT(*) AS total_trips,
@@ -283,53 +292,88 @@ SELECT
 FROM fact_trip f
 JOIN dim_location l
     ON f.dropoff_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
 GROUP BY
-    l.borough,
+    b.borough,
     l.zone_name,
     l.service_zone
 ORDER BY
     total_trips DESC
 LIMIT 10;
 
+-- 21. Flux borough -> borough
 SELECT
-    lp.borough AS pickup_borough,
-    ld.borough AS dropoff_borough,
+    bp.borough AS pickup_borough,
+    bd.borough AS dropoff_borough,
     COUNT(*) AS total_trips,
     SUM(f.total_amount) AS total_revenue
 FROM fact_trip f
 JOIN dim_location lp
     ON f.pickup_location_key = lp.location_key
+JOIN dim_borough bp
+    ON lp.borough_key = bp.borough_key
 JOIN dim_location ld
     ON f.dropoff_location_key = ld.location_key
+JOIN dim_borough bd
+    ON ld.borough_key = bd.borough_key
 GROUP BY
-    lp.borough,
-    ld.borough
+    bp.borough,
+    bd.borough
 ORDER BY
     total_trips DESC;
 
+-- 22. Revenus par borough de pickup
 SELECT
-    l.borough,
+    b.borough,
     COUNT(*) AS total_trips,
     SUM(f.total_amount) AS total_revenue,
     AVG(f.total_amount) AS avg_trip_amount
 FROM fact_trip f
 JOIN dim_location l
     ON f.pickup_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
 GROUP BY
-    l.borough
+    b.borough
 ORDER BY
     total_revenue DESC;
 
+-- 23. Heures de pointe par borough
 SELECT
-    l.borough,
+    b.borough,
     f.pickup_hour,
     COUNT(*) AS total_trips
 FROM fact_trip f
 JOIN dim_location l
     ON f.pickup_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
 GROUP BY
-    l.borough,
+    b.borough,
     f.pickup_hour
 ORDER BY
-    l.borough,
+    b.borough,
     f.pickup_hour;
+
+-- 24. CBD congestion fee global
+SELECT
+    SUM(cbd_congestion_fee) AS total_cbd_congestion_fee,
+    AVG(cbd_congestion_fee) AS avg_cbd_congestion_fee
+FROM fact_trip;
+
+-- 25. CBD congestion fee par borough de pickup
+SELECT
+    b.borough,
+    COUNT(*) AS total_trips,
+    SUM(f.cbd_congestion_fee) AS total_cbd_fees,
+    AVG(f.cbd_congestion_fee) AS avg_cbd_fee
+FROM fact_trip f
+JOIN dim_location l
+    ON f.pickup_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
+GROUP BY
+    b.borough
+ORDER BY
+    total_cbd_fees DESC;

@@ -5,6 +5,8 @@
 DROP TABLE IF EXISTS fact_trip;
 DROP TABLE IF EXISTS dim_date;
 DROP TABLE IF EXISTS dim_location;
+DROP TABLE IF EXISTS dim_borough;
+DROP TABLE IF EXISTS dim_vendor;
 DROP TABLE IF EXISTS dim_payment_type;
 DROP TABLE IF EXISTS dim_rate_code;
 DROP TABLE IF EXISTS dim_vendor;
@@ -40,17 +42,51 @@ FROM all_dates
 ORDER BY full_date;
 
 -- =========================================================
--- DIM_LOCATION
--- Source: official TLC taxi zone lookup CSV
+-- DIM_BOROUGH
 -- =========================================================
+
+CREATE TABLE dim_borough AS
+SELECT DISTINCT
+    row_number() OVER () AS borough_key,
+    borough
+FROM (
+    SELECT
+        CASE
+            WHEN Borough IN ('Unknown','N/A') THEN 'Unknown'
+            ELSE Borough
+        END AS borough
+    FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv')
+)
+ORDER BY borough;
+
+-- =========================================================
+-- DIM_LOCATION
+-- =========================================================
+
 CREATE TABLE dim_location AS
 SELECT
-    CAST(LocationID AS INTEGER) AS location_key,
-    CAST(LocationID AS INTEGER) AS location_id,
-    Borough AS borough,
-    Zone AS zone_name,
-    service_zone
-FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv')
+    CAST(z.LocationID AS INTEGER) AS location_key,
+    CAST(z.LocationID AS INTEGER) AS location_id,
+
+    b.borough_key,
+
+    z.Zone AS zone_name,
+
+    CASE
+        WHEN z.service_zone IN ('Unknown','N/A') THEN 'Unknown'
+        ELSE z.service_zone
+    END AS service_zone
+
+FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv') z
+
+JOIN dim_borough b
+ON (
+    CASE
+        WHEN z.Borough IN ('Unknown','N/A') THEN 'Unknown'
+        ELSE z.Borough
+    END
+) = b.borough
+
 ORDER BY location_key;
 
 -- =========================================================

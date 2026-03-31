@@ -11,3 +11,10 @@ SELECT COUNT(*) FROM dim_vendor;
 SELECT *
 FROM fact_trip
 LIMIT 10;
+
+SELECT
+    borough,
+    COUNT(*) AS zones
+FROM dim_location
+GROUP BY borough
+ORDER BY zones DESC
