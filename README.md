@@ -9,7 +9,7 @@
 
 # City Mobility Analytics
 
-End-to-end data analytics project analyzing **New York City taxi trips** to explore urban mobility patterns and build demand forecasting models.
+End-to-end **data analytics project** analyzing **New York City taxi trips** to explore urban mobility patterns and build demand forecasting models.
 
 This project demonstrates a complete analytics pipeline including:
 
@@ -30,8 +30,8 @@ The project includes:
 
 - ingestion of raw trip data
 - analytical data warehouse built with DuckDB
-- dimensional star schema for analytics
-- exploratory SQL analysis
+- dimensional **star schema** for analytics
+- exploratory and analytical SQL queries
 - business intelligence dashboards
 - demand forecasting
 
@@ -54,6 +54,32 @@ For this project, the **Yellow Taxi dataset for 2025** is used.
 
 Raw data is stored as **Parquet files**.
 
+The project also uses the official **TLC Taxi Zone Lookup dataset** to enrich the geographical dimension with:
+
+- borough
+- zone
+- service zone
+
+---
+
+# Data Model
+
+The analytical warehouse is modeled using a **star schema** optimized for analytics and BI tools.
+
+Fact table:
+
+- **fact_trip** — one row per taxi trip
+
+Dimension tables:
+
+- **dim_date**
+- **dim_location**
+- **dim_payment_type**
+- **dim_rate_code**
+- **dim_vendor**
+
+The `dim_location` table is enriched using the official **TLC Taxi Zone Lookup** dataset to provide geographic attributes such as borough and zone names.
+
 ---
 
 # Project Architecture
@@ -66,9 +92,11 @@ DuckDB Analytical Warehouse
 ↓
 SQL Exploration
 ↓
-Data Cleaning & Staging
+Data Cleaning & Staging (2025 only)
 ↓
 Dimensional Modeling (Star Schema)
+↓
+Analytical SQL Queries
 ↓
 Power BI Dashboard
 ↓
@@ -85,15 +113,16 @@ nycyellowtaxitrip
 
 data/
 raw/ # original parquet files
+lookup/ # TLC taxi zone lookup table
 
 duckdb/
 nyc_taxi.duckdb # analytical database
 
 sql/
-exploration.sql # exploratory analysis queries
-quality.sql # compare accepted vs rejected records
-quality_start_schema.sql # check star schema composition
-staging.sql # data cleaning and staging
+exploration.sql # exploratory data analysis
+staging.sql # data cleaning and staging layer
+quality.sql # data quality checks
+quality_star_schema.sql # star schema validation
 
 scripts/
 ingestion/ # Python ingestion scripts
@@ -124,14 +153,14 @@ Current stage:
 - raw dataset collected
 - DuckDB warehouse created
 - data imported from parquet files
-- initial SQL exploration implemented
-- data cleaning and staging layer
-- dimensional star schema modeling
+- exploratory SQL analysis implemented
+- data cleaning and staging layer created
+- dimensional star schema implemented
+- analytical SQL queries developed
 
 ---
 
 # Next Steps
 
-- analytical SQL queries
-- Power BI dashboard
-- demand forecasting model
+- build Power BI dashboard
+- implement demand forecasting model

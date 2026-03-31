@@ -2,11 +2,9 @@
 -- STAR SCHEMA - NYC YELLOW TAXI
 -- =========================================================
 
--- Nettoyage préalable
 DROP TABLE IF EXISTS fact_trip;
 DROP TABLE IF EXISTS dim_date;
-DROP TABLE IF EXISTS dim_pickup_location;
-DROP TABLE IF EXISTS dim_dropoff_location;
+DROP TABLE IF EXISTS dim_location;
 DROP TABLE IF EXISTS dim_payment_type;
 DROP TABLE IF EXISTS dim_rate_code;
 DROP TABLE IF EXISTS dim_vendor;
@@ -42,23 +40,17 @@ FROM all_dates
 ORDER BY full_date;
 
 -- =========================================================
--- DIM_PICKUP_LOCATION
+-- DIM_LOCATION
+-- Source: official TLC taxi zone lookup CSV
 -- =========================================================
-CREATE TABLE dim_pickup_location AS
-SELECT DISTINCT
-    PULocationID AS location_key,
-    PULocationID AS location_id
-FROM stg_yellow_taxi
-ORDER BY location_key;
-
--- =========================================================
--- DIM_DROPOFF_LOCATION
--- =========================================================
-CREATE TABLE dim_dropoff_location AS
-SELECT DISTINCT
-    DOLocationID AS location_key,
-    DOLocationID AS location_id
-FROM stg_yellow_taxi
+CREATE TABLE dim_location AS
+SELECT
+    CAST(LocationID AS INTEGER) AS location_key,
+    CAST(LocationID AS INTEGER) AS location_id,
+    Borough AS borough,
+    Zone AS zone_name,
+    service_zone
+FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv')
 ORDER BY location_key;
 
 -- =========================================================
@@ -145,6 +137,7 @@ SELECT
     tolls_amount,
     improvement_surcharge,
     congestion_surcharge,
+    cbd_congestion_fee,
     Airport_fee,
     total_amount
 

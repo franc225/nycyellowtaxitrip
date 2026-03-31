@@ -261,3 +261,26 @@ GROUP BY
 ORDER BY
     d.year,
     d.month;
+
+SELECT
+    pickup_hour,
+    COUNT(*) AS total_trips,
+    AVG(total_amount) AS avg_trip_amount
+FROM fact_trip
+GROUP BY pickup_hour
+ORDER BY pickup_hour;
+
+SELECT
+    d.day_name,
+    f.pickup_hour,
+    COUNT(*) AS total_trips
+FROM fact_trip f
+JOIN dim_date d
+    ON f.pickup_date_key = d.date_key
+GROUP BY
+    d.day_name,
+    d.day_of_week,
+    f.pickup_hour
+ORDER BY
+    d.day_of_week,
+    f.pickup_hour;
