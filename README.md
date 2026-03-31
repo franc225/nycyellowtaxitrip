@@ -60,6 +60,8 @@ The project also uses the official **TLC Taxi Zone Lookup dataset** to enrich th
 - zone
 - service zone
 
+The dataset also includes the **CBD congestion fee**, introduced as part of New York City's congestion pricing policy.
+
 ---
 
 # Data Model

@@ -57,35 +57,7 @@ GROUP BY
 ORDER BY
     d.is_weekend;
 
--- 5. Top 10 pickup locations
-SELECT
-    pl.location_id AS pickup_location_id,
-    COUNT(*) AS total_trips,
-    SUM(f.total_amount) AS total_revenue
-FROM fact_trip f
-JOIN dim_pickup_location pl
-    ON f.pickup_location_key = pl.location_key
-GROUP BY
-    pl.location_id
-ORDER BY
-    total_trips DESC
-LIMIT 10;
-
--- 6. Top 10 dropoff locations
-SELECT
-    dl.location_id AS dropoff_location_id,
-    COUNT(*) AS total_trips,
-    SUM(f.total_amount) AS total_revenue
-FROM fact_trip f
-JOIN dim_dropoff_location dl
-    ON f.dropoff_location_key = dl.location_key
-GROUP BY
-    dl.location_id
-ORDER BY
-    total_trips DESC
-LIMIT 10;
-
--- 7. Analyse par type de paiement
+-- 5. Analyse par type de paiement
 SELECT
     pt.payment_type_desc,
     COUNT(*) AS total_trips,
@@ -100,7 +72,7 @@ GROUP BY
 ORDER BY
     total_trips DESC;
 
--- 8. Analyse par rate code
+-- 6. Analyse par rate code
 SELECT
     rc.rate_code_desc,
     COUNT(*) AS total_trips,
@@ -115,7 +87,7 @@ GROUP BY
 ORDER BY
     total_trips DESC;
 
--- 9. Analyse par vendor
+-- 7. Analyse par vendor
 SELECT
     v.vendor_desc,
     COUNT(*) AS total_trips,
@@ -130,7 +102,7 @@ GROUP BY
 ORDER BY
     total_trips DESC;
 
--- 10. Performance opérationnelle globale
+-- 8. Performance opérationnelle globale
 SELECT
     AVG(trip_distance) AS avg_trip_distance,
     AVG(trip_duration_minutes) AS avg_trip_duration_minutes,
@@ -138,7 +110,7 @@ SELECT
     AVG(passenger_count) AS avg_passenger_count
 FROM fact_trip;
 
--- 11. Revenu moyen par distance
+-- 9. Revenu moyen par distance
 SELECT
     CASE
         WHEN trip_distance < 1 THEN '< 1 mile'
@@ -156,7 +128,7 @@ GROUP BY
 ORDER BY
     distance_bucket;
 
--- 12. Analyse des pourboires par type de paiement
+-- 10. Analyse des pourboires par type de paiement
 SELECT
     pt.payment_type_desc,
     AVG(f.tip_amount) AS avg_tip_amount,
@@ -174,7 +146,7 @@ GROUP BY
 ORDER BY
     avg_tip_amount DESC;
 
--- 13. Jours avec le plus de trajets
+-- 11. Jours avec le plus de trajets
 SELECT
     d.full_date,
     COUNT(*) AS total_trips,
@@ -188,7 +160,7 @@ ORDER BY
     total_trips DESC
 LIMIT 20;
 
--- 14. Jours avec le plus de revenus
+-- 12. Jours avec le plus de revenus
 SELECT
     d.full_date,
     COUNT(*) AS total_trips,
@@ -202,7 +174,7 @@ ORDER BY
     total_revenue DESC
 LIMIT 20;
 
--- 15. Analyse mensuelle de la distance moyenne et durée moyenne
+-- 13. Analyse mensuelle de la distance moyenne et durée moyenne
 SELECT
     d.year,
     d.month,
@@ -221,7 +193,7 @@ ORDER BY
     d.year,
     d.month;
 
--- 16. Demande quotidienne
+-- 14. Demande quotidienne
 SELECT
     d.full_date,
     COUNT(*) AS total_trips
@@ -233,7 +205,7 @@ GROUP BY
 ORDER BY
     d.full_date;
 
--- 17. Revenu quotidien
+-- 15. Revenu quotidien
 SELECT
     d.full_date,
     SUM(f.total_amount) AS total_revenue
@@ -245,7 +217,7 @@ GROUP BY
 ORDER BY
     d.full_date;
 
--- 18. Demande mensuelle
+-- 16. Demande mensuelle
 SELECT
     d.year,
     d.month,
@@ -283,4 +255,81 @@ GROUP BY
     f.pickup_hour
 ORDER BY
     d.day_of_week,
+    f.pickup_hour;
+
+SELECT
+    l.borough,
+    l.zone_name,
+    l.service_zone,
+    COUNT(*) AS total_trips,
+    SUM(f.total_amount) AS total_revenue
+FROM fact_trip f
+JOIN dim_location l
+    ON f.pickup_location_key = l.location_key
+GROUP BY
+    l.borough,
+    l.zone_name,
+    l.service_zone
+ORDER BY
+    total_trips DESC
+LIMIT 10;
+
+SELECT
+    l.borough,
+    l.zone_name,
+    l.service_zone,
+    COUNT(*) AS total_trips,
+    SUM(f.total_amount) AS total_revenue
+FROM fact_trip f
+JOIN dim_location l
+    ON f.dropoff_location_key = l.location_key
+GROUP BY
+    l.borough,
+    l.zone_name,
+    l.service_zone
+ORDER BY
+    total_trips DESC
+LIMIT 10;
+
+SELECT
+    lp.borough AS pickup_borough,
+    ld.borough AS dropoff_borough,
+    COUNT(*) AS total_trips,
+    SUM(f.total_amount) AS total_revenue
+FROM fact_trip f
+JOIN dim_location lp
+    ON f.pickup_location_key = lp.location_key
+JOIN dim_location ld
+    ON f.dropoff_location_key = ld.location_key
+GROUP BY
+    lp.borough,
+    ld.borough
+ORDER BY
+    total_trips DESC;
+
+SELECT
+    l.borough,
+    COUNT(*) AS total_trips,
+    SUM(f.total_amount) AS total_revenue,
+    AVG(f.total_amount) AS avg_trip_amount
+FROM fact_trip f
+JOIN dim_location l
+    ON f.pickup_location_key = l.location_key
+GROUP BY
+    l.borough
+ORDER BY
+    total_revenue DESC;
+
+SELECT
+    l.borough,
+    f.pickup_hour,
+    COUNT(*) AS total_trips
+FROM fact_trip f
+JOIN dim_location l
+    ON f.pickup_location_key = l.location_key
+GROUP BY
+    l.borough,
+    f.pickup_hour
+ORDER BY
+    l.borough,
     f.pickup_hour;
