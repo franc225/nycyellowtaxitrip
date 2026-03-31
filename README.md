@@ -70,7 +70,6 @@ The analytical warehouse follows a **star schema** optimized for analytics.
 
 ```mermaid
 erDiagram
-
     FACT_TRIP {
         BIGINT trip_id
         INT pickup_date_key
@@ -149,10 +148,9 @@ erDiagram
     FACT_TRIP }o--|| DIM_PAYMENT_TYPE : payment
     FACT_TRIP }o--|| DIM_RATE_CODE : rate_code
     FACT_TRIP }o--|| DIM_VENDOR : vendor
+```
 
----
-
-# Project Architecture
+## Project Architecture
 
 Raw Parquet Files
 ↓
