@@ -64,23 +64,91 @@ The dataset also includes the **CBD congestion fee**, introduced as part of New 
 
 ---
 
-# Data Model
+## Data Model
 
-The analytical warehouse is modeled using a **star schema** optimized for analytics and BI tools.
+The analytical warehouse follows a **star schema** optimized for analytics.
 
-Fact table:
+```mermaid
+erDiagram
 
-- **fact_trip** — one row per taxi trip
+    FACT_TRIP {
+        BIGINT trip_id
+        INT pickup_date_key
+        INT dropoff_date_key
+        INT pickup_time_key
+        INT pickup_location_key
+        INT dropoff_location_key
+        INT payment_type_key
+        INT rate_code_key
+        INT vendor_key
+        INT passenger_count
+        DOUBLE trip_distance
+        DOUBLE trip_duration_minutes
+        DOUBLE avg_speed_mph
+        DOUBLE fare_amount
+        DOUBLE tip_amount
+        DOUBLE total_amount
+        DOUBLE cbd_congestion_fee
+    }
 
-Dimension tables:
+    DIM_DATE {
+        INT date_key
+        DATE full_date
+        INT year
+        INT quarter
+        INT month_number
+        STRING month_name
+        INT week_of_year
+        INT day_of_month
+        STRING day_name
+        BOOLEAN is_weekend
+        STRING season
+    }
 
-- **dim_date**
-- **dim_location**
-- **dim_payment_type**
-- **dim_rate_code**
-- **dim_vendor**
+    DIM_TIME {
+        INT time_key
+        INT hour_24
+        STRING time_label
+        STRING day_period
+        BOOLEAN is_peak_commute_hour
+    }
 
-The `dim_location` table is enriched using the official **TLC Taxi Zone Lookup** dataset to provide geographic attributes such as borough and zone names.
+    DIM_LOCATION {
+        INT location_key
+        INT borough_key
+        STRING zone_name
+        STRING service_zone
+    }
+
+    DIM_BOROUGH {
+        INT borough_key
+        STRING borough
+    }
+
+    DIM_PAYMENT_TYPE {
+        INT payment_type_key
+        STRING payment_type_desc
+    }
+
+    DIM_RATE_CODE {
+        INT rate_code_key
+        STRING rate_code_desc
+    }
+
+    DIM_VENDOR {
+        INT vendor_key
+        STRING vendor_desc
+    }
+
+    FACT_TRIP }o--|| DIM_DATE : pickup_date
+    FACT_TRIP }o--|| DIM_DATE : dropoff_date
+    FACT_TRIP }o--|| DIM_TIME : pickup_time
+    FACT_TRIP }o--|| DIM_LOCATION : pickup_location
+    FACT_TRIP }o--|| DIM_LOCATION : dropoff_location
+    DIM_LOCATION }o--|| DIM_BOROUGH : borough
+    FACT_TRIP }o--|| DIM_PAYMENT_TYPE : payment
+    FACT_TRIP }o--|| DIM_RATE_CODE : rate_code
+    FACT_TRIP }o--|| DIM_VENDOR : vendor
 
 ---
 

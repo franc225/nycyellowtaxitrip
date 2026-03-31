@@ -10,36 +10,117 @@ DROP TABLE IF EXISTS dim_vendor;
 DROP TABLE IF EXISTS dim_payment_type;
 DROP TABLE IF EXISTS dim_rate_code;
 DROP TABLE IF EXISTS dim_vendor;
+DROP TABLE IF EXISTS dim_time;
 
 -- =========================================================
 -- DIM_DATE
+-- Full calendar for year 2025
 -- =========================================================
+
 CREATE TABLE dim_date AS
-WITH all_dates AS (
-    SELECT DISTINCT pickup_date AS full_date
-    FROM stg_yellow_taxi
-
-    UNION
-
-    SELECT DISTINCT dropoff_date AS full_date
-    FROM stg_yellow_taxi
-)
 SELECT
-    CAST(strftime(full_date, '%Y%m%d') AS INTEGER) AS date_key,
-    full_date,
-    EXTRACT(year FROM full_date) AS year,
-    EXTRACT(quarter FROM full_date) AS quarter,
-    EXTRACT(month FROM full_date) AS month,
-    strftime(full_date, '%B') AS month_name,
-    EXTRACT(day FROM full_date) AS day,
-    EXTRACT(dow FROM full_date) AS day_of_week,
-    strftime(full_date, '%A') AS day_name,
+    CAST(strftime(d, '%Y%m%d') AS INTEGER) AS date_key,
+    d AS full_date,
+
+    EXTRACT(year FROM d) AS year,
+    EXTRACT(quarter FROM d) AS quarter,
+    EXTRACT(month FROM d) AS month_number,
+    EXTRACT(week FROM d) AS week_of_year,
+    EXTRACT(day FROM d) AS day_of_month,
+    EXTRACT(dow FROM d) AS day_of_week,
+
+    strftime(d, '%Y-%m') AS year_month,
+    CONCAT(CAST(EXTRACT(year FROM d) AS VARCHAR), '-Q', CAST(EXTRACT(quarter FROM d) AS VARCHAR)) AS year_quarter,
+
+    strftime(d, '%B') AS month_name,
+    strftime(d, '%b') AS month_short_name,
+    strftime(d, '%A') AS day_name,
+    strftime(d, '%a') AS day_short_name,
+
     CASE
-        WHEN EXTRACT(dow FROM full_date) IN (0, 6) THEN TRUE
+        WHEN EXTRACT(dow FROM d) IN (0, 6) THEN TRUE
         ELSE FALSE
-    END AS is_weekend
-FROM all_dates
-ORDER BY full_date;
+    END AS is_weekend,
+
+    CASE
+        WHEN EXTRACT(dow FROM d) IN (1, 2, 3, 4, 5) THEN TRUE
+        ELSE FALSE
+    END AS is_weekday,
+
+    CASE
+        WHEN EXTRACT(day FROM d) = 1 THEN TRUE
+        ELSE FALSE
+    END AS is_month_start,
+
+    CASE
+        WHEN d = last_day(d) THEN TRUE
+        ELSE FALSE
+    END AS is_month_end,
+
+    CASE
+        WHEN EXTRACT(month FROM d) IN (12, 1, 2) THEN 'Winter'
+        WHEN EXTRACT(month FROM d) IN (3, 4, 5) THEN 'Spring'
+        WHEN EXTRACT(month FROM d) IN (6, 7, 8) THEN 'Summer'
+        ELSE 'Fall'
+    END AS season
+
+FROM generate_series(
+    DATE '2025-01-01',
+    DATE '2025-12-31',
+    INTERVAL 1 DAY
+) t(d)
+ORDER BY d;
+
+-- =========================================================
+-- DIM_TIME
+-- Hour-level time dimension
+-- =========================================================
+
+CREATE TABLE dim_time AS
+SELECT
+    h AS time_key,
+    h AS hour_24,
+    CASE
+        WHEN h = 0 THEN '00:00'
+        WHEN h = 1 THEN '01:00'
+        WHEN h = 2 THEN '02:00'
+        WHEN h = 3 THEN '03:00'
+        WHEN h = 4 THEN '04:00'
+        WHEN h = 5 THEN '05:00'
+        WHEN h = 6 THEN '06:00'
+        WHEN h = 7 THEN '07:00'
+        WHEN h = 8 THEN '08:00'
+        WHEN h = 9 THEN '09:00'
+        WHEN h = 10 THEN '10:00'
+        WHEN h = 11 THEN '11:00'
+        WHEN h = 12 THEN '12:00'
+        WHEN h = 13 THEN '13:00'
+        WHEN h = 14 THEN '14:00'
+        WHEN h = 15 THEN '15:00'
+        WHEN h = 16 THEN '16:00'
+        WHEN h = 17 THEN '17:00'
+        WHEN h = 18 THEN '18:00'
+        WHEN h = 19 THEN '19:00'
+        WHEN h = 20 THEN '20:00'
+        WHEN h = 21 THEN '21:00'
+        WHEN h = 22 THEN '22:00'
+        ELSE '23:00'
+    END AS time_label,
+
+    CASE
+        WHEN h BETWEEN 0 AND 5 THEN 'Night'
+        WHEN h BETWEEN 6 AND 11 THEN 'Morning'
+        WHEN h BETWEEN 12 AND 16 THEN 'Afternoon'
+        WHEN h BETWEEN 17 AND 20 THEN 'Evening'
+        ELSE 'Late Evening'
+    END AS day_period,
+
+    CASE
+        WHEN h IN (7, 8, 9, 16, 17, 18) THEN TRUE
+        ELSE FALSE
+    END AS is_peak_commute_hour
+FROM generate_series(0, 23) t(h)
+ORDER BY h;
 
 -- =========================================================
 -- DIM_BOROUGH
@@ -153,7 +234,7 @@ SELECT
     CAST(strftime(pickup_date, '%Y%m%d') AS INTEGER) AS pickup_date_key,
     CAST(strftime(dropoff_date, '%Y%m%d') AS INTEGER) AS dropoff_date_key,
 
-    pickup_hour,
+    pickup_hour AS pickup_time_key,
 
     PULocationID AS pickup_location_key,
     DOLocationID AS dropoff_location_key,
