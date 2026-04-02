@@ -150,6 +150,15 @@ erDiagram
     FACT_TRIP }o--|| DIM_VENDOR : vendor
 ```
 
+## Power BI Dashboard
+
+The Power BI dashboard is structured following the four phases of Business Intelligence:
+
+1. Descriptive analytics — mobility overview
+2. Diagnostic analytics — demand drivers
+3. Predictive analytics — demand trends
+4. Prescriptive analytics — operational insights
+
 ## Project Architecture
 
 Raw Parquet Files
