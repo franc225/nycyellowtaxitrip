@@ -1,0 +1,30 @@
+Trips = COUNTROWS(fact_trip)
+Revenue = SUM(fact_trip[total_amount])
+Fare Amount = SUM(fact_trip[fare_amount])
+Tips = SUM(fact_trip[tip_amount])
+Trip Distance = SUM(fact_trip[trip_distance])
+CBD Congestion Fee = SUM(fact_trip[cbd_congestion_fee])
+
+Average Revenue per Trip = DIVIDE([Revenue], [Trips])
+Average Trip Distance = AVERAGE(fact_trip[trip_distance])
+Average Trip Duration = AVERAGE(fact_trip[trip_duration_minutes])
+Average Speed = AVERAGE(fact_trip[avg_speed_mph])
+Average Tip = AVERAGE(fact_trip[tip_amount])
+
+Tip % of Fare = DIVIDE([Tips], [Fare Amount])
+CBD Fee per Trip = DIVIDE([CBD Congestion Fee], [Trips])
+
+Trips by Pickup = COUNTROWS(fact_trip)
+
+Dropoff Trips =
+CALCULATE(
+    COUNTROWS(fact_trip),
+    USERELATIONSHIP(fact_trip[dropoff_location_key], dim_location[location_key])
+)
+Dropoff Revenue =
+CALCULATE(
+    SUM(fact_trip[total_amount]),
+    USERELATIONSHIP(fact_trip[dropoff_location_key], dim_location[location_key])
+)
+
+Daily Trips = [Trips]
