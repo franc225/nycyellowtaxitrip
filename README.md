@@ -191,6 +191,7 @@ exploration.sql # exploratory data analysis
 staging.sql # data cleaning and staging layer
 quality.sql # data quality checks
 quality_star_schema.sql # star schema validation
+validation.sql # complete validation raw data to star schema
 
 scripts/
 ingestion/ # Python ingestion scripts
