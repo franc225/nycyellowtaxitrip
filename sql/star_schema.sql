@@ -125,50 +125,47 @@ ORDER BY h;
 -- =========================================================
 -- DIM_BOROUGH
 -- =========================================================
-
 CREATE TABLE dim_borough AS
-SELECT DISTINCT
-    row_number() OVER () AS borough_key,
+SELECT
+    row_number() OVER (ORDER BY borough) AS borough_key,
     borough
 FROM (
-    SELECT
+    SELECT DISTINCT
         CASE
-            WHEN Borough IN ('Unknown','N/A') THEN 'Unknown'
+            WHEN Borough IN ('Unknown', 'N/A') THEN 'Unknown'
             ELSE Borough
         END AS borough
     FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv')
-)
-ORDER BY borough;
+) b;
 
 -- =========================================================
 -- DIM_LOCATION
 -- =========================================================
-
 CREATE TABLE dim_location AS
+WITH src AS (
+    SELECT DISTINCT
+        CAST(LocationID AS INTEGER) AS location_key,
+        CAST(LocationID AS INTEGER) AS location_id,
+        CASE
+            WHEN Borough IN ('Unknown', 'N/A') THEN 'Unknown'
+            ELSE Borough
+        END AS borough,
+        Zone AS zone_name,
+        CASE
+            WHEN service_zone IN ('Unknown', 'N/A') THEN 'Unknown'
+            ELSE service_zone
+        END AS service_zone
+    FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv')
+)
 SELECT
-    CAST(z.LocationID AS INTEGER) AS location_key,
-    CAST(z.LocationID AS INTEGER) AS location_id,
-
+    s.location_key,
+    s.location_id,
     b.borough_key,
-
-    z.Zone AS zone_name,
-
-    CASE
-        WHEN z.service_zone IN ('Unknown','N/A') THEN 'Unknown'
-        ELSE z.service_zone
-    END AS service_zone
-
-FROM read_csv_auto('data/lookup/taxi_zone_lookup.csv') z
-
+    s.zone_name,
+    s.service_zone
+FROM src s
 JOIN dim_borough b
-ON (
-    CASE
-        WHEN z.Borough IN ('Unknown','N/A') THEN 'Unknown'
-        ELSE z.Borough
-    END
-) = b.borough
-
-ORDER BY location_key;
+    ON s.borough = b.borough;
 
 -- =========================================================
 -- DIM_PAYMENT_TYPE
@@ -259,3 +256,14 @@ SELECT
     total_amount
 
 FROM stg_yellow_taxi;
+
+CREATE OR REPLACE TABLE agg_location_flows AS
+SELECT
+    pickup_location_key,
+    dropoff_location_key,
+    COUNT(*) AS total_trips,
+    SUM(total_amount) AS total_revenue
+FROM fact_trip
+GROUP BY
+    pickup_location_key,
+    dropoff_location_key;

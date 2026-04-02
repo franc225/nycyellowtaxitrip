@@ -6,3 +6,5 @@ data/raw/
 duckdb/
 
 data/lookup/
+
+dashboard/nycyellowtaxitrip.pbix
