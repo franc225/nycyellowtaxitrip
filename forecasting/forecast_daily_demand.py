@@ -1,6 +1,10 @@
 from pathlib import Path
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 
 
 def validate_daily_series(df: pd.DataFrame) -> pd.DataFrame:
@@ -189,6 +193,17 @@ def build_model_output(
         ignore_index=True,
     )
 
+def build_calendar_features(df):
+    X = df.copy()
+
+    X["t"] = range(len(X))
+    X["day_of_week"] = X["date"].dt.dayofweek
+    X["month"] = X["date"].dt.month
+    X["week_of_year"] = X["date"].dt.isocalendar().week.astype(int)
+    X["is_weekend"] = (X["day_of_week"] >= 5).astype(int)
+
+    return X
+
 
 def main() -> None:
     project_dir = Path(r"C:\dev\nycyellowtaxitrip")
@@ -287,6 +302,62 @@ def main() -> None:
         "mae": round(tw_metrics["MAE"], 2),
         "rmse": round(tw_metrics["RMSE"], 2),
         "mape_pct": round(tw_metrics["MAPE_pct"], 2) if pd.notna(tw_metrics["MAPE_pct"]) else np.nan,
+    })
+
+    # -------------------------
+    # Model 3 : ridge_calendar
+    # -------------------------
+
+    train_feat = build_calendar_features(train_df)
+    test_feat = build_calendar_features(test_df)
+
+    features = ["day_of_week", "month", "week_of_year", "is_weekend"]
+
+    X_train = train_feat[features]
+    y_train = train_feat["total_trips"]
+
+    X_test = test_feat[features]
+
+    preprocess = ColumnTransformer(
+        transformers=[
+            (
+                "cat",
+                OneHotEncoder(drop="first", handle_unknown="ignore"),
+                ["day_of_week", "month"],
+            ),
+            ("num", "passthrough", ["is_weekend", "week_of_year"]),
+        ]
+    )
+
+    model = Pipeline([
+        ("preprocess", preprocess),
+        ("model", Ridge(alpha=1.0))
+    ])
+
+    model.fit(X_train, y_train)
+
+    ridge_pred = model.predict(X_test)
+
+    ridge_backtest = pd.DataFrame({
+        "date": test_df["date"],
+        "forecast_trips": np.round(ridge_pred).astype(int),
+        "lower_ci": pd.NA,
+        "upper_ci": pd.NA
+    })
+
+    ridge_metrics = calculate_metrics(
+        actual=test_df["total_trips"],
+        forecast=ridge_backtest["forecast_trips"]
+    )
+
+    all_metrics.append({
+        "model_name": "ridge_calendar",
+        "train_rows": len(train_df),
+        "test_rows": len(test_df),
+        "forecast_horizon_days": forecast_horizon,
+        "mae": round(ridge_metrics["MAE"], 2),
+        "rmse": round(ridge_metrics["RMSE"], 2),
+        "mape_pct": round(ridge_metrics["MAPE_pct"], 2)
     })
 
     final_output = pd.concat(all_outputs, ignore_index=True)

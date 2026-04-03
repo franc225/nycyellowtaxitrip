@@ -1,3 +1,4 @@
 model_name,train_rows,test_rows,forecast_horizon_days,mae,rmse,mape_pct
+ridge_calendar,335,30,30,15889.03,22737.84,22.87
 trend_plus_weekday,335,30,30,17615.47,22474.11,23.67
 naive_weekly,335,30,30,18883.93,27321.34,24.83

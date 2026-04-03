@@ -22,7 +22,7 @@ This project demonstrates a complete analytics pipeline including:
 - dimensional modeling
 - exploratory SQL analysis
 - business intelligence dashboards
-- predictive analytics
+- demand forecasting using machine learning models
 
 ---
 
@@ -270,10 +270,11 @@ MAPE (Mean Absolute Percentage Error)
 Example comparison:
 
 Model	MAE	RMSE	MAPE
+ridge_calendar	15889	22737	22.87%
 trend_plus_weekday	17615	22474	23.67%
 naive_weekly	18883	27321	24.83%
 
-The trend + weekday model outperforms the naive baseline, confirming that including trend improves predictive accuracy.
+The **ridge_calendar model provides the best predictive performance**.
 
 Forecast results are exported as:
 
@@ -295,13 +296,13 @@ DuckDB Analytical Warehouse
 ↓
 Data Cleaning & Staging
 ↓
-Dimensional Star Schema
+Dimensional Modeling (Star Schema)
 ↓
 Analytical SQL Queries
 ↓
-Demand Aggregation (daily)
+Daily Demand Aggregation
 ↓
-Forecasting Models (Python)
+Forecasting Models (Python / scikit-learn)
 ↓
 Forecast Evaluation
 ↓
@@ -363,21 +364,22 @@ README.md
 Current stage:
 
 - raw dataset collected
-- DuckDB warehouse created
+- DuckDB analytical warehouse created
 - data imported from parquet files
 - exploratory SQL analysis implemented
-- data cleaning and staging layer created
-- dimensional star schema implemented
+- staging and data quality layers implemented
+- dimensional star schema built
 - analytical SQL queries developed
-- build Power BI dashboard
+- Power BI dashboard created
+- daily demand dataset generated
+- demand forecasting models implemented
+- model evaluation and backtesting completed
 
 ---
 
 # Next Steps
 
-- Planned improvements for the forecasting pipeline:
-
-calendar-based regression model using scikit-learn
-additional seasonal features (month, week of year)
-revenue forecasting
-forecast visualization inside Power BI
+- revenue forecasting
+- additional time series features (lags and rolling averages)
+- forecast visualization in Power BI
+- borough-level demand forecasting
