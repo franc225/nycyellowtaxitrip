@@ -67,6 +67,7 @@ The dataset also includes the **CBD congestion fee**, introduced as part of New 
 ## Data Model
 
 The analytical warehouse follows a **star schema** optimized for analytics.
+The model includes a core trip-level star schema (`fact_trip`) for descriptive, diagnostic and operational analytics, as well as a dedicated aggregated flow table (`agg_location_flows`) for mobility origin-destination analysis in Power BI.
 
 ```mermaid
 erDiagram
@@ -139,6 +140,37 @@ erDiagram
         STRING vendor_desc
     }
 
+    AGG_LOCATION_FLOWS {
+        INT pickup_location_key
+        INT dropoff_location_key
+        BIGINT total_trips
+        DOUBLE total_revenue
+    }
+
+    DIM_PICKUP_LOCATION {
+        INT location_key
+        INT borough_key
+        STRING zone_name
+        STRING service_zone
+    }
+
+    DIM_DROPOFF_LOCATION {
+        INT location_key
+        INT borough_key
+        STRING zone_name
+        STRING service_zone
+    }
+
+    DIM_PICKUP_BOROUGH {
+        INT borough_key
+        STRING borough
+    }
+
+    DIM_DROPOFF_BOROUGH {
+        INT borough_key
+        STRING borough
+    }
+
     FACT_TRIP }o--|| DIM_DATE : pickup_date
     FACT_TRIP }o--|| DIM_DATE : dropoff_date
     FACT_TRIP }o--|| DIM_TIME : pickup_time
@@ -148,6 +180,11 @@ erDiagram
     FACT_TRIP }o--|| DIM_PAYMENT_TYPE : payment
     FACT_TRIP }o--|| DIM_RATE_CODE : rate_code
     FACT_TRIP }o--|| DIM_VENDOR : vendor
+
+    AGG_LOCATION_FLOWS }o--|| DIM_PICKUP_LOCATION : pickup_location
+    AGG_LOCATION_FLOWS }o--|| DIM_DROPOFF_LOCATION : dropoff_location
+    DIM_PICKUP_LOCATION }o--|| DIM_PICKUP_BOROUGH : pickup_borough
+    DIM_DROPOFF_LOCATION }o--|| DIM_DROPOFF_BOROUGH : dropoff_borough
 ```
 
 ## Power BI Dashboard
@@ -158,6 +195,7 @@ The Power BI dashboard is structured following the four phases of Business Intel
 2. Diagnostic analytics — demand drivers
 3. Predictive analytics — demand trends
 4. Prescriptive analytics — operational insights
+5. Geographical analytics
 
 ## Project Architecture
 
@@ -235,10 +273,10 @@ Current stage:
 - data cleaning and staging layer created
 - dimensional star schema implemented
 - analytical SQL queries developed
+- build Power BI dashboard
 
 ---
 
 # Next Steps
 
-- build Power BI dashboard
 - implement demand forecasting model
