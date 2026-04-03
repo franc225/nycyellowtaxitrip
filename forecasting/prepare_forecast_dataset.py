@@ -12,6 +12,7 @@ def main() -> None:
         raise FileNotFoundError(f"Fichier introuvable : {input_csv}")
 
     df = pd.read_csv(input_csv)
+    df = df[["date", "total_trips", "total_revenue"]].copy()
 
     expected_columns = {"date", "total_trips"}
     missing_columns = expected_columns - set(df.columns)

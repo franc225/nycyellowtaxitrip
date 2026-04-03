@@ -1,0 +1,2 @@
+model_name,train_rows,test_rows,forecast_horizon_days,mae,rmse,mape_pct
+ridge_calendar_revenue,335,30,30,506941.93,754073.17,25.07
