@@ -4,8 +4,12 @@
 ![DuckDB](https://img.shields.io/badge/DuckDB-Analytics%20DB-yellow)
 ![SQL](https://img.shields.io/badge/SQL-Analytics-orange)
 ![Power BI](https://img.shields.io/badge/PowerBI-Dashboard-F2C811)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-orange)
+![Time Series](https://img.shields.io/badge/Time-Series%20Forecasting-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-Modeling-F7931E)
 ![Data Engineering](https://img.shields.io/badge/Data-Engineering-green)
 ![Data Analytics](https://img.shields.io/badge/Data-Analytics-blueviolet)
+![Dataset](https://img.shields.io/badge/Dataset-NYC%20Taxi%20Trips-black)
 
 # City Mobility Analytics
 
@@ -197,6 +201,90 @@ The Power BI dashboard is structured following the four phases of Business Intel
 4. Prescriptive analytics — operational insights
 5. Geographical analytics
 
+---
+
+## Forecasting Pipeline
+
+To extend the analytics layer toward predictive analytics, a demand forecasting pipeline was implemented.
+
+The forecasting pipeline predicts daily taxi trip demand using historical aggregated demand data.
+
+Forecasting dataset
+
+An aggregated daily dataset is generated from the analytical warehouse:
+
+agg_daily_demand
+
+Granularity:
+
+1 row = 1 day
+
+Main variables:
+
+date
+total_trips
+total_revenue
+
+The dataset is exported as:
+
+data/forecasting/daily_demand_prepared.csv
+
+Forecasting models
+
+Two forecasting approaches are currently implemented:
+
+1. Naive Weekly Baseline
+
+A simple baseline model that assumes demand follows a weekly pattern:
+
+forecast(t) = demand(t-7)
+
+This model captures strong weekly seasonality typical in urban mobility demand.
+
+2. Trend + Weekday Seasonality Model
+
+A simple time series model combining:
+
+linear trend
+weekday seasonality factors
+
+The model estimates:
+
+Trips ≈ Trend(t) × WeekdayFactor
+
+This approach captures:
+
+long-term trend in demand
+weekly commuting patterns
+
+Model evaluation
+
+A 30-day holdout backtest is used to evaluate forecasting performance.
+
+Evaluation metrics:
+
+MAE (Mean Absolute Error)
+RMSE (Root Mean Square Error)
+MAPE (Mean Absolute Percentage Error)
+
+Example comparison:
+
+Model	MAE	RMSE	MAPE
+trend_plus_weekday	17615	22474	23.67%
+naive_weekly	18883	27321	24.83%
+
+The trend + weekday model outperforms the naive baseline, confirming that including trend improves predictive accuracy.
+
+Forecast results are exported as:
+
+data/forecasting/forecast_daily_demand.csv
+
+Metrics are stored in:
+
+data/forecasting/forecast_daily_demand_metrics.csv
+
+---
+
 ## Project Architecture
 
 Raw Parquet Files
@@ -205,17 +293,19 @@ Python Ingestion
 ↓
 DuckDB Analytical Warehouse
 ↓
-SQL Exploration
+Data Cleaning & Staging
 ↓
-Data Cleaning & Staging (2025 only)
-↓
-Dimensional Modeling (Star Schema)
+Dimensional Star Schema
 ↓
 Analytical SQL Queries
 ↓
-Power BI Dashboard
+Demand Aggregation (daily)
 ↓
-Demand Forecasting
+Forecasting Models (Python)
+↓
+Forecast Evaluation
+↓
+Power BI Dashboard
 
 
 This architecture mirrors a **modern analytics stack used in real data platforms**.
@@ -227,24 +317,30 @@ This architecture mirrors a **modern analytics stack used in real data platforms
 nycyellowtaxitrip
 
 data/
-raw/ # original parquet files
-lookup/ # TLC taxi zone lookup table
+    raw/
+    lookup/
+    forecasting/
+        daily_demand_prepared.csv
+        forecast_daily_demand.csv
+        forecast_daily_demand_metrics.csv
 
 duckdb/
-nyc_taxi.duckdb # analytical database
+    nyc_taxi.duckdb
 
 sql/
-exploration.sql # exploratory data analysis
-staging.sql # data cleaning and staging layer
-quality.sql # data quality checks
-quality_star_schema.sql # star schema validation
-validation.sql # complete validation raw data to star schema
+    exploration.sql
+    staging.sql
+    quality.sql
+    validation.sql
 
 scripts/
-ingestion/ # Python ingestion scripts
+    ingestion/
+    forecasting/
+        prepare_forecast_dataset.py
+        forecast_daily_demand.py
 
 dashboards/
-powerbi/ # Power BI dashboard
+    powerbi/
 
 README.md
 
@@ -279,4 +375,9 @@ Current stage:
 
 # Next Steps
 
-- implement demand forecasting model
+- Planned improvements for the forecasting pipeline:
+
+calendar-based regression model using scikit-learn
+additional seasonal features (month, week of year)
+revenue forecasting
+forecast visualization inside Power BI

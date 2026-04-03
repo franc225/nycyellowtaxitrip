@@ -267,3 +267,21 @@ FROM fact_trip
 GROUP BY
     pickup_location_key,
     dropoff_location_key;
+
+CREATE OR REPLACE TABLE agg_daily_demand AS
+SELECT
+    d.date_key,
+    d.full_date,
+    COUNT(*) AS total_trips,
+    SUM(f.total_amount) AS total_revenue,
+    AVG(f.trip_distance) AS avg_trip_distance,
+    AVG(f.trip_duration_minutes) AS avg_trip_duration,
+    AVG(f.tip_amount) AS avg_tip_amount
+FROM fact_trip f
+JOIN dim_date d
+    ON f.pickup_date_key = d.date_key
+GROUP BY
+    d.date_key,
+    d.full_date
+ORDER BY
+    d.full_date
