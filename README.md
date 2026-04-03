@@ -284,6 +284,27 @@ Metrics are stored in:
 
 data/forecasting/forecast_daily_demand_metrics.csv
 
+Additional time series features were introduced to improve forecasting accuracy:
+
+- lag_7
+- lag_14
+- rolling_mean_7
+- rolling_mean_14
+
+These features capture short-term demand dynamics and significantly improve model performance.
+
+Final model performance (trip demand):
+
+| Model | MAE | RMSE | MAPE |
+|------|------|------|------|
+| ridge_calendar_lags | 14835 | 21098 | 20.95% |
+| trend_plus_weekday | 17820 | 22347 | 23.65% |
+| naive_weekly | 18883 | 27321 | 24.83% |
+
+Lag features and rolling averages significantly improved trip demand forecasting,
+but did not materially improve revenue forecasting, suggesting that revenue is influenced
+by additional sources of variability beyond short-term temporal dynamics.
+
 ---
 
 ## Project Architecture
@@ -374,12 +395,12 @@ Current stage:
 - daily demand dataset generated
 - demand forecasting models implemented
 - model evaluation and backtesting completed
+- revenue forecasting
 
 ---
 
 # Next Steps
 
-- revenue forecasting
 - additional time series features (lags and rolling averages)
 - forecast visualization in Power BI
 - borough-level demand forecasting
