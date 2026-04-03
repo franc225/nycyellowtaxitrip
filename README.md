@@ -305,6 +305,20 @@ Lag features and rolling averages significantly improved trip demand forecasting
 but did not materially improve revenue forecasting, suggesting that revenue is influenced
 by additional sources of variability beyond short-term temporal dynamics.
 
+Demand forecasting was extended to the borough level.
+
+A Ridge regression model with calendar and lag features was trained independently
+for each borough.
+
+Results show that:
+
+- Manhattan has the most stable demand and achieves the best forecast accuracy (~20% MAPE)
+- Outer boroughs show higher relative error due to lower trip volume
+- Very low-volume areas (EWR, Staten Island) exhibit high MAPE due to sparse demand
+
+This reflects the real structure of the NYC Yellow Taxi market,
+which is heavily concentrated in Manhattan.
+
 ---
 
 ## Project Architecture
@@ -396,11 +410,11 @@ Current stage:
 - demand forecasting models implemented
 - model evaluation and backtesting completed
 - revenue forecasting
+- additional time series features (lags and rolling averages)
+- borough-level demand forecasting
 
 ---
 
 # Next Steps
 
-- additional time series features (lags and rolling averages)
 - forecast visualization in Power BI
-- borough-level demand forecasting

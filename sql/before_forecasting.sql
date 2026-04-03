@@ -26,7 +26,8 @@ ORDER BY avg_trips DESC;
 COPY (
     SELECT
         full_date AS date,
-        total_trips
+        total_trips,
+        total_revenue
     FROM agg_daily_demand
     ORDER BY full_date
 )

@@ -1,0 +1,421 @@
+date,borough,actual_trips,forecast_trips,lower_ci,upper_ci,split,model_name
+2025-12-02,Bronx,774,788,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Bronx,778,795,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Bronx,851,704,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Bronx,879,669,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Bronx,372,553,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Bronx,357,529,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Bronx,829,832,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Bronx,813,845,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Bronx,798,877,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Bronx,836,778,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Bronx,874,687,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Bronx,346,517,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Bronx,283,489,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Bronx,764,800,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Bronx,773,798,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Bronx,786,799,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Bronx,817,822,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Bronx,831,837,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Bronx,391,496,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Bronx,341,470,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Bronx,839,793,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Bronx,829,814,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Bronx,432,823,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Bronx,261,823,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Bronx,430,816,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Bronx,186,477,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Bronx,309,426,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Bronx,611,484,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Bronx,633,490,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Bronx,552,401,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Bronx,,472,,,future,ridge_calendar_lags_borough
+2026-01-02,Bronx,,543,,,future,ridge_calendar_lags_borough
+2026-01-03,Bronx,,285,,,future,ridge_calendar_lags_borough
+2026-01-04,Bronx,,298,,,future,ridge_calendar_lags_borough
+2026-01-05,Bronx,,599,,,future,ridge_calendar_lags_borough
+2026-01-06,Bronx,,621,,,future,ridge_calendar_lags_borough
+2026-01-07,Bronx,,479,,,future,ridge_calendar_lags_borough
+2026-01-08,Bronx,,395,,,future,ridge_calendar_lags_borough
+2026-01-09,Bronx,,459,,,future,ridge_calendar_lags_borough
+2026-01-10,Bronx,,236,,,future,ridge_calendar_lags_borough
+2026-01-11,Bronx,,265,,,future,ridge_calendar_lags_borough
+2026-01-12,Bronx,,501,,,future,ridge_calendar_lags_borough
+2026-01-13,Bronx,,524,,,future,ridge_calendar_lags_borough
+2026-01-14,Bronx,,459,,,future,ridge_calendar_lags_borough
+2026-01-15,Bronx,,411,,,future,ridge_calendar_lags_borough
+2026-01-16,Bronx,,455,,,future,ridge_calendar_lags_borough
+2026-01-17,Bronx,,245,,,future,ridge_calendar_lags_borough
+2026-01-18,Bronx,,249,,,future,ridge_calendar_lags_borough
+2026-01-19,Bronx,,472,,,future,ridge_calendar_lags_borough
+2026-01-20,Bronx,,501,,,future,ridge_calendar_lags_borough
+2026-01-21,Bronx,,440,,,future,ridge_calendar_lags_borough
+2026-01-22,Bronx,,397,,,future,ridge_calendar_lags_borough
+2026-01-23,Bronx,,431,,,future,ridge_calendar_lags_borough
+2026-01-24,Bronx,,231,,,future,ridge_calendar_lags_borough
+2026-01-25,Bronx,,232,,,future,ridge_calendar_lags_borough
+2026-01-26,Bronx,,432,,,future,ridge_calendar_lags_borough
+2026-01-27,Bronx,,460,,,future,ridge_calendar_lags_borough
+2026-01-28,Bronx,,421,,,future,ridge_calendar_lags_borough
+2026-01-29,Bronx,,391,,,future,ridge_calendar_lags_borough
+2026-01-30,Bronx,,417,,,future,ridge_calendar_lags_borough
+2025-12-02,Brooklyn,1901,1789,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Brooklyn,2101,1835,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Brooklyn,2131,1871,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Brooklyn,1967,2035,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Brooklyn,1276,1862,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Brooklyn,1373,1954,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Brooklyn,1950,2087,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Brooklyn,1915,2173,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Brooklyn,2098,2190,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Brooklyn,2018,2058,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Brooklyn,2017,1967,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Brooklyn,1356,1770,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Brooklyn,997,1832,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Brooklyn,1746,1929,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Brooklyn,1857,1982,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Brooklyn,2078,2040,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Brooklyn,2081,2035,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Brooklyn,1805,2039,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Brooklyn,1211,1733,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Brooklyn,1274,1792,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Brooklyn,1974,1949,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Brooklyn,1747,2042,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Brooklyn,1338,2096,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Brooklyn,695,2010,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Brooklyn,989,1920,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Brooklyn,524,1580,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Brooklyn,869,1517,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Brooklyn,1511,880,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Brooklyn,1596,927,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Brooklyn,1935,1009,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Brooklyn,,1437,,,future,ridge_calendar_lags_borough
+2026-01-02,Brooklyn,,1481,,,future,ridge_calendar_lags_borough
+2026-01-03,Brooklyn,,1186,,,future,ridge_calendar_lags_borough
+2026-01-04,Brooklyn,,1330,,,future,ridge_calendar_lags_borough
+2026-01-05,Brooklyn,,1670,,,future,ridge_calendar_lags_borough
+2026-01-06,Brooklyn,,1686,,,future,ridge_calendar_lags_borough
+2026-01-07,Brooklyn,,1623,,,future,ridge_calendar_lags_borough
+2026-01-08,Brooklyn,,1360,,,future,ridge_calendar_lags_borough
+2026-01-09,Brooklyn,,1434,,,future,ridge_calendar_lags_borough
+2026-01-10,Brooklyn,,1098,,,future,ridge_calendar_lags_borough
+2026-01-11,Brooklyn,,1214,,,future,ridge_calendar_lags_borough
+2026-01-12,Brooklyn,,1455,,,future,ridge_calendar_lags_borough
+2026-01-13,Brooklyn,,1506,,,future,ridge_calendar_lags_borough
+2026-01-14,Brooklyn,,1613,,,future,ridge_calendar_lags_borough
+2026-01-15,Brooklyn,,1443,,,future,ridge_calendar_lags_borough
+2026-01-16,Brooklyn,,1480,,,future,ridge_calendar_lags_borough
+2026-01-17,Brooklyn,,1211,,,future,ridge_calendar_lags_borough
+2026-01-18,Brooklyn,,1304,,,future,ridge_calendar_lags_borough
+2026-01-19,Brooklyn,,1491,,,future,ridge_calendar_lags_borough
+2026-01-20,Brooklyn,,1557,,,future,ridge_calendar_lags_borough
+2026-01-21,Brooklyn,,1583,,,future,ridge_calendar_lags_borough
+2026-01-22,Brooklyn,,1474,,,future,ridge_calendar_lags_borough
+2026-01-23,Brooklyn,,1510,,,future,ridge_calendar_lags_borough
+2026-01-24,Brooklyn,,1227,,,future,ridge_calendar_lags_borough
+2026-01-25,Brooklyn,,1298,,,future,ridge_calendar_lags_borough
+2026-01-26,Brooklyn,,1442,,,future,ridge_calendar_lags_borough
+2026-01-27,Brooklyn,,1505,,,future,ridge_calendar_lags_borough
+2026-01-28,Brooklyn,,1562,,,future,ridge_calendar_lags_borough
+2026-01-29,Brooklyn,,1481,,,future,ridge_calendar_lags_borough
+2026-01-30,Brooklyn,,1505,,,future,ridge_calendar_lags_borough
+2025-12-02,EWR,4,8,,,backtest,ridge_calendar_lags_borough
+2025-12-03,EWR,2,8,,,backtest,ridge_calendar_lags_borough
+2025-12-04,EWR,5,9,,,backtest,ridge_calendar_lags_borough
+2025-12-05,EWR,4,8,,,backtest,ridge_calendar_lags_borough
+2025-12-06,EWR,3,8,,,backtest,ridge_calendar_lags_borough
+2025-12-07,EWR,7,11,,,backtest,ridge_calendar_lags_borough
+2025-12-08,EWR,8,8,,,backtest,ridge_calendar_lags_borough
+2025-12-09,EWR,2,7,,,backtest,ridge_calendar_lags_borough
+2025-12-10,EWR,4,7,,,backtest,ridge_calendar_lags_borough
+2025-12-11,EWR,4,8,,,backtest,ridge_calendar_lags_borough
+2025-12-12,EWR,3,7,,,backtest,ridge_calendar_lags_borough
+2025-12-13,EWR,2,8,,,backtest,ridge_calendar_lags_borough
+2025-12-14,EWR,8,9,,,backtest,ridge_calendar_lags_borough
+2025-12-15,EWR,2,8,,,backtest,ridge_calendar_lags_borough
+2025-12-16,EWR,5,7,,,backtest,ridge_calendar_lags_borough
+2025-12-17,EWR,3,8,,,backtest,ridge_calendar_lags_borough
+2025-12-18,EWR,6,9,,,backtest,ridge_calendar_lags_borough
+2025-12-19,EWR,2,8,,,backtest,ridge_calendar_lags_borough
+2025-12-20,EWR,1,8,,,backtest,ridge_calendar_lags_borough
+2025-12-21,EWR,12,11,,,backtest,ridge_calendar_lags_borough
+2025-12-22,EWR,7,8,,,backtest,ridge_calendar_lags_borough
+2025-12-23,EWR,7,8,,,backtest,ridge_calendar_lags_borough
+2025-12-24,EWR,3,8,,,backtest,ridge_calendar_lags_borough
+2025-12-25,EWR,4,9,,,backtest,ridge_calendar_lags_borough
+2025-12-26,EWR,4,8,,,backtest,ridge_calendar_lags_borough
+2025-12-27,EWR,12,8,,,backtest,ridge_calendar_lags_borough
+2025-12-28,EWR,12,10,,,backtest,ridge_calendar_lags_borough
+2025-12-29,EWR,3,4,,,backtest,ridge_calendar_lags_borough
+2025-12-30,EWR,5,3,,,backtest,ridge_calendar_lags_borough
+2025-12-31,EWR,3,3,,,backtest,ridge_calendar_lags_borough
+2026-01-01,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-02,EWR,,1,,,future,ridge_calendar_lags_borough
+2026-01-03,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-04,EWR,,4,,,future,ridge_calendar_lags_borough
+2026-01-05,EWR,,1,,,future,ridge_calendar_lags_borough
+2026-01-06,EWR,,1,,,future,ridge_calendar_lags_borough
+2026-01-07,EWR,,1,,,future,ridge_calendar_lags_borough
+2026-01-08,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-09,EWR,,1,,,future,ridge_calendar_lags_borough
+2026-01-10,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-11,EWR,,5,,,future,ridge_calendar_lags_borough
+2026-01-12,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-13,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-14,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-15,EWR,,4,,,future,ridge_calendar_lags_borough
+2026-01-16,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-17,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-18,EWR,,6,,,future,ridge_calendar_lags_borough
+2026-01-19,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-20,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-21,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-22,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-23,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-24,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-25,EWR,,5,,,future,ridge_calendar_lags_borough
+2026-01-26,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-27,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-28,EWR,,2,,,future,ridge_calendar_lags_borough
+2026-01-29,EWR,,3,,,future,ridge_calendar_lags_borough
+2026-01-30,EWR,,2,,,future,ridge_calendar_lags_borough
+2025-12-02,Manhattan,93567,84759,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Manhattan,99941,88783,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Manhattan,111181,91802,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Manhattan,104492,96664,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Manhattan,103510,103416,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Manhattan,81517,89695,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Manhattan,91914,98095,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Manhattan,101322,111962,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Manhattan,103628,112331,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Manhattan,111913,103483,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Manhattan,107699,98660,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Manhattan,103925,98051,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Manhattan,76184,79883,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Manhattan,86149,86615,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Manhattan,97476,97996,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Manhattan,99817,102771,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Manhattan,102767,107312,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Manhattan,98722,100254,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Manhattan,92467,98883,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Manhattan,71243,77402,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Manhattan,71334,84338,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Manhattan,69940,94890,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Manhattan,59796,97265,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Manhattan,35837,97820,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Manhattan,52965,87477,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Manhattan,50019,82805,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Manhattan,51894,58410,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Manhattan,61107,63482,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Manhattan,67668,74560,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Manhattan,61096,79869,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Manhattan,,76630,,,future,ridge_calendar_lags_borough
+2026-01-02,Manhattan,,81268,,,future,ridge_calendar_lags_borough
+2026-01-03,Manhattan,,86887,,,future,ridge_calendar_lags_borough
+2026-01-04,Manhattan,,75370,,,future,ridge_calendar_lags_borough
+2026-01-05,Manhattan,,82995,,,future,ridge_calendar_lags_borough
+2026-01-06,Manhattan,,94939,,,future,ridge_calendar_lags_borough
+2026-01-07,Manhattan,,99475,,,future,ridge_calendar_lags_borough
+2026-01-08,Manhattan,,98256,,,future,ridge_calendar_lags_borough
+2026-01-09,Manhattan,,97275,,,future,ridge_calendar_lags_borough
+2026-01-10,Manhattan,,95958,,,future,ridge_calendar_lags_borough
+2026-01-11,Manhattan,,80829,,,future,ridge_calendar_lags_borough
+2026-01-12,Manhattan,,85223,,,future,ridge_calendar_lags_borough
+2026-01-13,Manhattan,,94287,,,future,ridge_calendar_lags_borough
+2026-01-14,Manhattan,,94030,,,future,ridge_calendar_lags_borough
+2026-01-15,Manhattan,,95434,,,future,ridge_calendar_lags_borough
+2026-01-16,Manhattan,,90166,,,future,ridge_calendar_lags_borough
+2026-01-17,Manhattan,,89702,,,future,ridge_calendar_lags_borough
+2026-01-18,Manhattan,,71772,,,future,ridge_calendar_lags_borough
+2026-01-19,Manhattan,,75730,,,future,ridge_calendar_lags_borough
+2026-01-20,Manhattan,,86647,,,future,ridge_calendar_lags_borough
+2026-01-21,Manhattan,,91010,,,future,ridge_calendar_lags_borough
+2026-01-22,Manhattan,,91983,,,future,ridge_calendar_lags_borough
+2026-01-23,Manhattan,,87308,,,future,ridge_calendar_lags_borough
+2026-01-24,Manhattan,,87453,,,future,ridge_calendar_lags_borough
+2026-01-25,Manhattan,,70356,,,future,ridge_calendar_lags_borough
+2026-01-26,Manhattan,,75553,,,future,ridge_calendar_lags_borough
+2026-01-27,Manhattan,,87720,,,future,ridge_calendar_lags_borough
+2026-01-28,Manhattan,,92323,,,future,ridge_calendar_lags_borough
+2026-01-29,Manhattan,,94264,,,future,ridge_calendar_lags_borough
+2026-01-30,Manhattan,,89133,,,future,ridge_calendar_lags_borough
+2025-12-02,Queens,13089,12753,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Queens,11840,12971,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Queens,11933,14278,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Queens,11474,14881,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Queens,7783,12429,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Queens,10815,14818,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Queens,12116,14566,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Queens,11121,12945,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Queens,10781,12363,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Queens,10760,12270,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Queens,11803,12274,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Queens,7378,10749,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Queens,8873,13679,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Queens,12662,13901,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Queens,9412,12683,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Queens,8779,12211,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Queens,8850,12469,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Queens,8773,12254,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Queens,7771,10085,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Queens,7243,13243,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Queens,7872,13110,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Queens,6998,11629,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Queens,4928,11192,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Queens,5050,11285,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Queens,6002,11195,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Queens,8618,8630,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Queens,11603,11972,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Queens,10672,9829,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Queens,9939,8774,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Queens,7941,9071,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Queens,,9137,,,future,ridge_calendar_lags_borough
+2026-01-02,Queens,,9604,,,future,ridge_calendar_lags_borough
+2026-01-03,Queens,,7013,,,future,ridge_calendar_lags_borough
+2026-01-04,Queens,,9718,,,future,ridge_calendar_lags_borough
+2026-01-05,Queens,,10216,,,future,ridge_calendar_lags_borough
+2026-01-06,Queens,,8687,,,future,ridge_calendar_lags_borough
+2026-01-07,Queens,,8476,,,future,ridge_calendar_lags_borough
+2026-01-08,Queens,,8691,,,future,ridge_calendar_lags_borough
+2026-01-09,Queens,,8593,,,future,ridge_calendar_lags_borough
+2026-01-10,Queens,,6301,,,future,ridge_calendar_lags_borough
+2026-01-11,Queens,,9060,,,future,ridge_calendar_lags_borough
+2026-01-12,Queens,,9567,,,future,ridge_calendar_lags_borough
+2026-01-13,Queens,,8224,,,future,ridge_calendar_lags_borough
+2026-01-14,Queens,,7805,,,future,ridge_calendar_lags_borough
+2026-01-15,Queens,,8083,,,future,ridge_calendar_lags_borough
+2026-01-16,Queens,,8174,,,future,ridge_calendar_lags_borough
+2026-01-17,Queens,,6168,,,future,ridge_calendar_lags_borough
+2026-01-18,Queens,,8976,,,future,ridge_calendar_lags_borough
+2026-01-19,Queens,,9467,,,future,ridge_calendar_lags_borough
+2026-01-20,Queens,,8182,,,future,ridge_calendar_lags_borough
+2026-01-21,Queens,,7767,,,future,ridge_calendar_lags_borough
+2026-01-22,Queens,,8159,,,future,ridge_calendar_lags_borough
+2026-01-23,Queens,,8312,,,future,ridge_calendar_lags_borough
+2026-01-24,Queens,,6288,,,future,ridge_calendar_lags_borough
+2026-01-25,Queens,,9102,,,future,ridge_calendar_lags_borough
+2026-01-26,Queens,,9609,,,future,ridge_calendar_lags_borough
+2026-01-27,Queens,,8322,,,future,ridge_calendar_lags_borough
+2026-01-28,Queens,,7927,,,future,ridge_calendar_lags_borough
+2026-01-29,Queens,,8306,,,future,ridge_calendar_lags_borough
+2026-01-30,Queens,,8435,,,future,ridge_calendar_lags_borough
+2025-12-02,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Staten Island,0,3,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Staten Island,0,3,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Staten Island,2,2,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Staten Island,0,3,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Staten Island,0,3,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Staten Island,5,3,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Staten Island,3,3,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Staten Island,2,2,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Staten Island,2,2,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Staten Island,1,3,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Staten Island,2,3,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Staten Island,1,2,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Staten Island,1,1,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Staten Island,12,1,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-02,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-03,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-04,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-05,Staten Island,,3,,,future,ridge_calendar_lags_borough
+2026-01-06,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-07,Staten Island,,3,,,future,ridge_calendar_lags_borough
+2026-01-08,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-09,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-10,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-11,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-12,Staten Island,,3,,,future,ridge_calendar_lags_borough
+2026-01-13,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-14,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-15,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-16,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-17,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-18,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-19,Staten Island,,3,,,future,ridge_calendar_lags_borough
+2026-01-20,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-21,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-22,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-23,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-24,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-25,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-26,Staten Island,,3,,,future,ridge_calendar_lags_borough
+2026-01-27,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-28,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-29,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2026-01-30,Staten Island,,2,,,future,ridge_calendar_lags_borough
+2025-12-02,Unknown,202,204,,,backtest,ridge_calendar_lags_borough
+2025-12-03,Unknown,251,214,,,backtest,ridge_calendar_lags_borough
+2025-12-04,Unknown,249,213,,,backtest,ridge_calendar_lags_borough
+2025-12-05,Unknown,278,211,,,backtest,ridge_calendar_lags_borough
+2025-12-06,Unknown,229,216,,,backtest,ridge_calendar_lags_borough
+2025-12-07,Unknown,188,198,,,backtest,ridge_calendar_lags_borough
+2025-12-08,Unknown,194,181,,,backtest,ridge_calendar_lags_borough
+2025-12-09,Unknown,268,196,,,backtest,ridge_calendar_lags_borough
+2025-12-10,Unknown,204,212,,,backtest,ridge_calendar_lags_borough
+2025-12-11,Unknown,283,215,,,backtest,ridge_calendar_lags_borough
+2025-12-12,Unknown,255,215,,,backtest,ridge_calendar_lags_borough
+2025-12-13,Unknown,289,216,,,backtest,ridge_calendar_lags_borough
+2025-12-14,Unknown,243,195,,,backtest,ridge_calendar_lags_borough
+2025-12-15,Unknown,207,176,,,backtest,ridge_calendar_lags_borough
+2025-12-16,Unknown,208,197,,,backtest,ridge_calendar_lags_borough
+2025-12-17,Unknown,231,208,,,backtest,ridge_calendar_lags_borough
+2025-12-18,Unknown,209,217,,,backtest,ridge_calendar_lags_borough
+2025-12-19,Unknown,188,214,,,backtest,ridge_calendar_lags_borough
+2025-12-20,Unknown,183,221,,,backtest,ridge_calendar_lags_borough
+2025-12-21,Unknown,153,201,,,backtest,ridge_calendar_lags_borough
+2025-12-22,Unknown,177,181,,,backtest,ridge_calendar_lags_borough
+2025-12-23,Unknown,151,197,,,backtest,ridge_calendar_lags_borough
+2025-12-24,Unknown,151,213,,,backtest,ridge_calendar_lags_borough
+2025-12-25,Unknown,119,217,,,backtest,ridge_calendar_lags_borough
+2025-12-26,Unknown,136,214,,,backtest,ridge_calendar_lags_borough
+2025-12-27,Unknown,116,219,,,backtest,ridge_calendar_lags_borough
+2025-12-28,Unknown,146,199,,,backtest,ridge_calendar_lags_borough
+2025-12-29,Unknown,125,271,,,backtest,ridge_calendar_lags_borough
+2025-12-30,Unknown,163,284,,,backtest,ridge_calendar_lags_borough
+2025-12-31,Unknown,164,300,,,backtest,ridge_calendar_lags_borough
+2026-01-01,Unknown,,219,,,future,ridge_calendar_lags_borough
+2026-01-02,Unknown,,225,,,future,ridge_calendar_lags_borough
+2026-01-03,Unknown,,236,,,future,ridge_calendar_lags_borough
+2026-01-04,Unknown,,227,,,future,ridge_calendar_lags_borough
+2026-01-05,Unknown,,212,,,future,ridge_calendar_lags_borough
+2026-01-06,Unknown,,237,,,future,ridge_calendar_lags_borough
+2026-01-07,Unknown,,258,,,future,ridge_calendar_lags_borough
+2026-01-08,Unknown,,270,,,future,ridge_calendar_lags_borough
+2026-01-09,Unknown,,269,,,future,ridge_calendar_lags_borough
+2026-01-10,Unknown,,276,,,future,ridge_calendar_lags_borough
+2026-01-11,Unknown,,258,,,future,ridge_calendar_lags_borough
+2026-01-12,Unknown,,239,,,future,ridge_calendar_lags_borough
+2026-01-13,Unknown,,257,,,future,ridge_calendar_lags_borough
+2026-01-14,Unknown,,274,,,future,ridge_calendar_lags_borough
+2026-01-15,Unknown,,277,,,future,ridge_calendar_lags_borough
+2026-01-16,Unknown,,275,,,future,ridge_calendar_lags_borough
+2026-01-17,Unknown,,279,,,future,ridge_calendar_lags_borough
+2026-01-18,Unknown,,259,,,future,ridge_calendar_lags_borough
+2026-01-19,Unknown,,239,,,future,ridge_calendar_lags_borough
+2026-01-20,Unknown,,256,,,future,ridge_calendar_lags_borough
+2026-01-21,Unknown,,271,,,future,ridge_calendar_lags_borough
+2026-01-22,Unknown,,275,,,future,ridge_calendar_lags_borough
+2026-01-23,Unknown,,272,,,future,ridge_calendar_lags_borough
+2026-01-24,Unknown,,276,,,future,ridge_calendar_lags_borough
+2026-01-25,Unknown,,256,,,future,ridge_calendar_lags_borough
+2026-01-26,Unknown,,236,,,future,ridge_calendar_lags_borough
+2026-01-27,Unknown,,253,,,future,ridge_calendar_lags_borough
+2026-01-28,Unknown,,268,,,future,ridge_calendar_lags_borough
+2026-01-29,Unknown,,272,,,future,ridge_calendar_lags_borough
+2026-01-30,Unknown,,270,,,future,ridge_calendar_lags_borough

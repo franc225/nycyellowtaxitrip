@@ -1,0 +1,8 @@
+borough,model_name,train_rows,test_rows,forecast_horizon_days,mae,rmse,mape_pct
+Manhattan,ridge_calendar_lags_borough,321,30,30,12328.77,18254.38,20.36
+Unknown,ridge_calendar_lags_borough,321,30,30,50.63,63.86,30.0
+Bronx,ridge_calendar_lags_borough,321,30,30,134.17,187.39,35.01
+Queens,ridge_calendar_lags_borough,321,30,30,2877.27,3429.92,37.04
+Brooklyn,ridge_calendar_lags_borough,321,30,30,420.63,546.13,38.33
+Staten Island,ridge_calendar_lags_borough,321,30,30,1.53,2.56,74.29
+EWR,ridge_calendar_lags_borough,321,30,30,3.5,4.0,126.11

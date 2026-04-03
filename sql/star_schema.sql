@@ -285,3 +285,24 @@ GROUP BY
     d.full_date
 ORDER BY
     d.full_date
+
+CREATE OR REPLACE TABLE agg_daily_borough_demand AS
+SELECT
+    d.date_key,
+    d.full_date,
+    b.borough,
+    COUNT(*) AS total_trips
+FROM fact_trip f
+JOIN dim_date d
+    ON f.pickup_date_key = d.date_key
+JOIN dim_location l
+    ON f.pickup_location_key = l.location_key
+JOIN dim_borough b
+    ON l.borough_key = b.borough_key
+GROUP BY
+    d.date_key,
+    d.full_date,
+    b.borough
+ORDER BY
+    d.full_date,
+    b.borough
