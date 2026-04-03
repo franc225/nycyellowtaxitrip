@@ -305,10 +305,104 @@ Lag features and rolling averages significantly improved trip demand forecasting
 but did not materially improve revenue forecasting, suggesting that revenue is influenced
 by additional sources of variability beyond short-term temporal dynamics.
 
-Demand forecasting was extended to the borough level.
+---
 
-A Ridge regression model with calendar and lag features was trained independently
+## Revenue Forecasting
+
+In addition to trip demand forecasting, the project also includes **daily revenue forecasting**.
+
+A similar machine learning pipeline is used to predict total daily taxi revenue.
+
+Forecasting dataset:
+
+The revenue forecasting dataset is derived from the same aggregated table:
+
+agg_daily_demand
+
+Granularity:
+
+1 row = 1 day
+
+Main variables:
+
+date  
+total_revenue  
+
+The dataset is exported as:
+
+data/forecasting/daily_revenue_prepared.csv
+
+Forecasting model:
+
+A **Ridge regression model with calendar features** is used:
+
+- day_of_week  
+- month  
+- week_of_year  
+- weekend flag  
+
+Lag features were tested but did not materially improve revenue forecasting performance.
+
+This suggests that revenue variability is influenced by additional factors such as:
+
+- trip distance variability
+- tip variability
+- trip composition
+
+Forecast results are exported as:
+
+data/forecasting/forecast_daily_revenue.csv
+
+Metrics are stored in:
+
+data/forecasting/forecast_daily_revenue_metrics.csv
+
+---
+
+## Borough-Level Demand Forecasting
+
+To capture spatial differences in taxi demand, the forecasting pipeline was extended
+to the **borough level**.
+
+An aggregated dataset is generated:
+
+agg_daily_borough_demand
+
+Granularity:
+
+1 row = 1 day × borough
+
+Main variables:
+
+date  
+borough  
+total_trips  
+
+The dataset is exported as:
+
+data/forecasting/daily_borough_demand_prepared.csv
+
+A **Ridge regression model with calendar and lag features** is trained independently
 for each borough.
+
+Features used:
+
+- day_of_week
+- month
+- week_of_year
+- is_weekend
+- lag_7
+- lag_14
+- rolling_mean_7
+- rolling_mean_14
+
+Forecast results are exported as:
+
+data/forecasting/forecast_borough_demand.csv
+
+Metrics are stored in:
+
+data/forecasting/forecast_borough_demand_metrics.csv
 
 Results show that:
 
@@ -337,7 +431,11 @@ Analytical SQL Queries
 ↓
 Daily Demand Aggregation
 ↓
-Forecasting Models (Python / scikit-learn)
+Demand Forecasting Models
+↓
+Revenue Forecasting Models
+↓
+Borough-Level Forecasting
 ↓
 Forecast Evaluation
 ↓
@@ -360,6 +458,14 @@ data/
         forecast_daily_demand.csv
         forecast_daily_demand_metrics.csv
 
+        daily_revenue_prepared.csv
+        forecast_daily_revenue.csv
+        forecast_daily_revenue_metrics.csv
+
+        daily_borough_demand_prepared.csv
+        forecast_borough_demand.csv
+        forecast_borough_demand_metrics.csv
+
 duckdb/
     nyc_taxi.duckdb
 
@@ -371,9 +477,14 @@ sql/
 
 scripts/
     ingestion/
+		load_parquet_to_duckdb.py
     forecasting/
         prepare_forecast_dataset.py
         forecast_daily_demand.py
+        prepare_revenue_forecast_dataset.py
+        forecast_daily_revenue.py
+        prepare_borough_forecast_dataset.py
+        forecast_borough_demand.py
 
 dashboards/
     powerbi/
@@ -408,13 +519,18 @@ Current stage:
 - Power BI dashboard created
 - daily demand dataset generated
 - demand forecasting models implemented
+- machine learning forecasting models (scikit-learn)
 - model evaluation and backtesting completed
-- revenue forecasting
-- additional time series features (lags and rolling averages)
+- revenue forecasting implemented
+- time series feature engineering (lags and rolling averages)
 - borough-level demand forecasting
+- spatial forecasting analysis
 
 ---
 
 # Next Steps
 
 - forecast visualization in Power BI
+- forecast vs actual analysis dashboard
+- borough-level forecast visualization
+- model monitoring and forecast comparison
