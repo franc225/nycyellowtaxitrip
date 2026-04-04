@@ -13,17 +13,12 @@
 
 # City Mobility Analytics
 
-End-to-end **data analytics project** analyzing **New York City taxi trips** to explore urban mobility patterns and build demand forecasting models.
+End-to-end data analytics project analyzing NYC Yellow Taxi trips using:
 
-This project demonstrates a complete analytics pipeline including:
-
-- data ingestion
-- analytical data warehousing
-- dimensional modeling
-- exploratory SQL analysis
-- business intelligence dashboards
-- demand forecasting using machine learning models
-
+- DuckDB analytics warehouse
+- dimensional data modeling
+- machine learning demand forecasting
+- interactive Power BI dashboards
 ---
 
 # Project Overview
@@ -593,3 +588,51 @@ Current stage:
 - forecast vs actual performance analysis
 - borough-level forecast insights
 - model comparison and monitoring
+
+---
+
+## Key Insights
+
+The analysis of NYC Yellow Taxi trips highlights several mobility patterns.
+
+Demand patterns
+
+- Taxi demand shows strong weekly seasonality.
+- Weekday commuting hours generate the highest demand.
+- Manhattan dominates the Yellow Taxi market.
+
+Forecasting results
+
+- Trip demand forecasting achieved a Mean Absolute Percentage Error (MAPE) of approximately **21%** using a Ridge regression model with calendar and lag features.
+- Revenue forecasting achieved a MAPE of approximately **25%**.
+- Borough-level forecasts show that lower-volume areas exhibit higher relative forecast error.
+
+Spatial dynamics
+
+- Manhattan accounts for the majority of trips.
+- Outer borough demand is significantly lower and more volatile.
+
+---
+
+## Limitations
+
+This project uses a single year of data (2025), which limits the ability to model long-term seasonality.
+
+Additional improvements could include:
+
+- multi-year training data
+- weather data integration
+- special event features
+- more advanced forecasting models
+
+---
+
+## Future Improvements
+
+Possible extensions of this project include:
+
+- weather data integration to improve demand forecasting
+- advanced time series models (Prophet, XGBoost, LSTM)
+- API-based prediction service
+- automated data pipelines
+- deployment of the forecasting models
