@@ -75,6 +75,7 @@ The model includes a core trip-level star schema (`fact_trip`) for descriptive, 
 
 ```mermaid
 erDiagram
+
     FACT_TRIP {
         BIGINT trip_id
         INT pickup_date_key
@@ -112,7 +113,6 @@ erDiagram
     DIM_TIME {
         INT time_key
         INT hour_24
-        STRING time_label
         STRING day_period
         BOOLEAN is_peak_commute_hour
     }
@@ -175,6 +175,65 @@ erDiagram
         STRING borough
     }
 
+    FORECAST_DAILY_DEMAND {
+        DATE date
+        INT actual_trips
+        INT forecast_trips
+        INT lower_ci
+        INT upper_ci
+        STRING model_name
+    }
+
+    FORECAST_DAILY_REVENUE {
+        DATE date
+        DOUBLE actual_revenue
+        DOUBLE forecast_revenue
+        DOUBLE lower_ci
+        DOUBLE upper_ci
+        STRING model_name
+    }
+
+    FORECAST_BOROUGH_DEMAND {
+        DATE date
+        STRING borough
+        INT actual_trips
+        INT forecast_trips
+        INT lower_ci
+        INT upper_ci
+        STRING model_name
+    }
+
+    FORECAST_DAILY_DEMAND_METRICS {
+        STRING model_name
+        DOUBLE mae
+        DOUBLE rmse
+        DOUBLE mape_pct
+        INT train_rows
+        INT test_rows
+        INT forecast_horizon_days
+    }
+
+    FORECAST_DAILY_REVENUE_METRICS {
+        STRING model_name
+        DOUBLE mae
+        DOUBLE rmse
+        DOUBLE mape_pct
+        INT train_rows
+        INT test_rows
+        INT forecast_horizon_days
+    }
+
+    FORECAST_BOROUGH_DEMAND_METRICS {
+        STRING borough
+        STRING model_name
+        DOUBLE mae
+        DOUBLE rmse
+        DOUBLE mape_pct
+        INT train_rows
+        INT test_rows
+        INT forecast_horizon_days
+    }
+
     FACT_TRIP }o--|| DIM_DATE : pickup_date
     FACT_TRIP }o--|| DIM_DATE : dropoff_date
     FACT_TRIP }o--|| DIM_TIME : pickup_time
@@ -189,17 +248,25 @@ erDiagram
     AGG_LOCATION_FLOWS }o--|| DIM_DROPOFF_LOCATION : dropoff_location
     DIM_PICKUP_LOCATION }o--|| DIM_PICKUP_BOROUGH : pickup_borough
     DIM_DROPOFF_LOCATION }o--|| DIM_DROPOFF_BOROUGH : dropoff_borough
+
+    FORECAST_DAILY_DEMAND }o--|| DIM_DATE : date
+    FORECAST_DAILY_REVENUE }o--|| DIM_DATE : date
+    FORECAST_BOROUGH_DEMAND }o--|| DIM_DATE : date
+    FORECAST_BOROUGH_DEMAND }o--|| DIM_BOROUGH : borough
 ```
 
 ## Power BI Dashboard
 
-The Power BI dashboard is structured following the four phases of Business Intelligence:
+The Power BI dashboard is structured following the main phases of analytics:
 
-1. Descriptive analytics — mobility overview
-2. Diagnostic analytics — demand drivers
-3. Predictive analytics — demand trends
-4. Prescriptive analytics — operational insights
-5. Geographical analytics
+1. **Descriptive analytics** — mobility overview
+2. **Diagnostic analytics** — demand drivers
+3. **Trend analysis** — temporal demand patterns
+4. **Geographical analytics** — demand by borough and zone
+5. **Predictive analytics** — forecasting of trips and revenue
+
+The final dashboard includes a **Forecast Analytics page** displaying
+model predictions and forecast accuracy metrics.
 
 ---
 
@@ -359,59 +426,53 @@ data/forecasting/forecast_daily_revenue_metrics.csv
 
 ---
 
-## Borough-Level Demand Forecasting
+## Forecast Visualization (Power BI)
 
-To capture spatial differences in taxi demand, the forecasting pipeline was extended
-to the **borough level**.
+Forecast results are integrated into the Power BI dashboard to provide
+interactive exploration of predictive analytics results.
 
-An aggregated dataset is generated:
+The dashboard includes a dedicated **Forecast Analytics page** showing:
 
-agg_daily_borough_demand
+### Demand Forecast
 
-Granularity:
+Comparison of:
 
-1 row = 1 day × borough
+- historical taxi trip demand
+- model predictions
+- future demand forecasts
 
-Main variables:
+The visualization highlights weekly seasonality patterns and demonstrates
+how the forecasting model captures recurring mobility demand cycles.
 
-date  
-borough  
-total_trips  
+### Revenue Forecast
 
-The dataset is exported as:
+Daily revenue forecasts are compared with observed revenue values during the
+backtest period.
 
-data/forecasting/daily_borough_demand_prepared.csv
+This allows evaluation of forecasting accuracy and identification of
+revenue volatility patterns.
 
-A **Ridge regression model with calendar and lag features** is trained independently
-for each borough.
+### Borough-Level Forecast
 
-Features used:
+Taxi demand forecasting is extended to the **borough level**.
 
-- day_of_week
-- month
-- week_of_year
-- is_weekend
-- lag_7
-- lag_14
-- rolling_mean_7
-- rolling_mean_14
+Users can interactively explore forecasts by borough using slicers.
 
-Forecast results are exported as:
+The dashboard demonstrates that:
 
-data/forecasting/forecast_borough_demand.csv
+- **Manhattan dominates Yellow Taxi demand**
+- outer boroughs show lower and more variable demand
+- low-volume zones such as EWR and Staten Island exhibit higher relative forecast error
 
-Metrics are stored in:
+### Forecast Metrics
 
-data/forecasting/forecast_borough_demand_metrics.csv
+Forecast accuracy metrics are also displayed in the dashboard:
 
-Results show that:
+- MAE
+- RMSE
+- MAPE
 
-- Manhattan has the most stable demand and achieves the best forecast accuracy (~20% MAPE)
-- Outer boroughs show higher relative error due to lower trip volume
-- Very low-volume areas (EWR, Staten Island) exhibit high MAPE due to sparse demand
-
-This reflects the real structure of the NYC Yellow Taxi market,
-which is heavily concentrated in Manhattan.
+These metrics allow comparison between models and across boroughs.
 
 ---
 
@@ -439,7 +500,9 @@ Borough-Level Forecasting
 ↓
 Forecast Evaluation
 ↓
-Power BI Dashboard
+Forecast Data Export (CSV)
+↓
+Power BI Forecast Analytics Dashboard
 
 
 This architecture mirrors a **modern analytics stack used in real data platforms**.
@@ -502,6 +565,8 @@ README.md
 - Parquet
 - Power BI
 - Git / GitHub
+- scikit-learn
+- Time Series Feature Engineering
 
 ---
 
@@ -525,12 +590,6 @@ Current stage:
 - time series feature engineering (lags and rolling averages)
 - borough-level demand forecasting
 - spatial forecasting analysis
-
----
-
-# Next Steps
-
-- forecast visualization in Power BI
-- forecast vs actual analysis dashboard
-- borough-level forecast visualization
-- model monitoring and forecast comparison
+- forecast vs actual performance analysis
+- borough-level forecast insights
+- model comparison and monitoring
